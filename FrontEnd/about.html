@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>About FoodLens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="about">
+
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+    <div id="leaf-layer"></div>
+  </div>
+
+  <div id="app-nav"></div>
+
+  <main class="main page">
+    <section class="about-hero">
+      <div>
+        <h1>About <span class="grad">FoodLens</span></h1>
+        <p class="lead">FoodLens is an AI-powered food inspection platform designed to help users understand the visible condition of fruits and vegetables through image-based analysis.</p>
+      </div>
+      <div class="about-photos" aria-hidden="true">
+        <img class="p1" data-food="strawberry" alt="">
+        <img class="p2" data-food="orange" alt="">
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <div class="reveal">
+          <h2>Our Purpose</h2>
+          <p>Judging food by eye is something everyone does, but it is easy to miss early changes. FoodLens gives you a second look: a quick, consistent check of how a fruit or vegetable appears right now, so you can decide what to do next.</p>
+        </div>
+        <div class="split-media reveal" style="--i:1"><img data-food="tomato" alt="A ripe tomato on a plain background"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal"><h2>How It Works</h2><p>Three steps from photo to result.</p></div>
+      <div class="steps">
+        <article class="step glass reveal" style="--i:0">
+          <img class="thumb" data-food="banana" alt="A banana ready to be photographed">
+          <div class="icon-wrap" data-icon="camera"></div>
+          <h3>1. Capture or Upload</h3>
+          <p>Take a photo with your camera or upload an image of a fruit or vegetable.</p>
+        </article>
+        <article class="step glass reveal" style="--i:1">
+          <img class="thumb" data-food="apple" alt="An apple being analyzed">
+          <div class="icon-wrap" data-icon="cpu"></div>
+          <h3>2. AI Analysis</h3>
+          <p>The image is analyzed for the food type and its visible condition.</p>
+        </article>
+        <article class="step glass reveal" style="--i:2">
+          <img class="thumb" data-food="broccoli" alt="Fresh broccoli">
+          <div class="icon-wrap" data-icon="bulb"></div>
+          <h3>3. Inspection Insight</h3>
+          <p>See the condition, a confidence percentage and when to inspect again.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split flip">
+        <div class="reveal">
+          <h2>AI-Based Inspection</h2>
+          <p>FoodLens looks at visual cues such as colour, texture and surface changes, then estimates whether the food looks Fresh or Rotten and how confident it is about that estimate.</p>
+          <ul class="check-list">
+            <li><i data-icon="check"></i>Works from a single photo</li>
+            <li><i data-icon="check"></i>Shows a confidence percentage with every result</li>
+            <li><i data-icon="check"></i>Saves each inspection to your history</li>
+          </ul>
+        </div>
+        <div class="split-media reveal" style="--i:1"><img data-food="strawberry" alt="Fresh strawberries"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal"><h2>Why Food Quality Matters</h2><p>Small checks make everyday food choices easier.</p></div>
+      <div class="value-grid">
+        <article class="value-card glass reveal" style="--i:0"><img data-food="orange" alt="Sliced oranges"><div><h3>Less waste</h3><p>Spotting changes early helps you use food while it is still good.</p></div></article>
+        <article class="value-card glass reveal" style="--i:1"><img data-food="apple" alt="A red apple"><div><h3>Better choices</h3><p>A clear result helps you decide whether to eat, store or discard.</p></div></article>
+        <article class="value-card glass reveal" style="--i:2"><img data-food="broccoli" alt="Fresh broccoli"><div><h3>Consistent checks</h3><p>The same kind of check every time, recorded in your history.</p></div></article>
+      </div>
+      <p class="note reveal">FoodLens gives a visual estimate from a photo. It cannot detect things you cannot see, so use your own judgement and normal food-safety guidance.</p>
+    </section>
+
+    <section class="cta glass reveal">
+      <div><h2>Try it on your own food</h2><p>Upload a photo or use your camera.</p></div>
+      <a class="btn btn-primary" href="detection.html">Start Inspection <i data-icon="arrow"></i></a>
+    </section>
+  </main>
+
+  <div id="app-chatbot"></div>
+  <script src="script.js"></script>
+</body>
+</html>

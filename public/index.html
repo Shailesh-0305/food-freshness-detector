@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Freshness AI</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            margin: 0;
+        }
+        h1 {
+            color: #4caf50;
+            margin-bottom: 0.5rem;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            background: #1e1e1e;
+        }
+        video {
+            width: 100%;
+            display: block;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .btn-capture {
+            background-color: #4caf50;
+            color: white;
+        }
+        .btn-capture:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        .btn-capture:disabled {
+            background-color: #555;
+            color: #aaa;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .results-panel {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: none;
+        }
+        .results-panel.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .label {
+            color: #aaa;
+        }
+        .value {
+            font-weight: bold;
+            color: #4caf50;
+        }
+        .value.warning {
+            color: #ff9800;
+        }
+        .value.danger {
+            color: #f44336;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+            color: #4caf50;
+            font-weight: bold;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Food Freshness AI</h1>
+    <p>Hold your fruit up to the camera to analyze it.</p>
+
+    <div class="container">
+        <div class="video-container">
+            <video id="webcam" autoplay playsinline></video>
+        </div>
+        
+        <div class="controls">
+            <button id="captureBtn" class="btn-capture">Capture & Analyze</button>
+            <span style="align-self: center; font-weight: bold; margin: 0 10px;">OR</span>
+            <input type="file" id="fileUpload" accept="image/*" style="display: none;">
+            <button id="uploadBtn" class="btn-capture" style="background-color: #2196F3;">Upload Image</button>
+        </div>
+
+        <div id="loading">Scanning and passing to AI model (takes 3-5s)...</div>
+
+        <div class="results-panel" id="resultsPanel">
+            <h2>Analysis Results</h2>
+            <div class="result-item">
+                <span class="label">Detected Item</span>
+                <span class="value" id="resItem">--</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Stage</span>
+                <span class="value" id="resStage">--</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Freshness Score</span>
+                <span class="value" id="resScore">--</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Confidence</span>
+                <span class="value" id="resConf">--</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Recommendation</span>
+                <span class="value" id="resRec">--</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden canvas for capturing frames -->
+    <canvas id="canvas" style="display: none;"></canvas>
+
+    <script src="app.js"></script>
+</body>
+</html>

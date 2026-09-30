@@ -1,0 +1,15 @@
+torch
+torchvision
+transformers
+pandas
+numpy
+gymnasium
+stable-baselines3
+opencv-python
+grad-cam
+scikit-learn
+matplotlib
+Pillow
+fastapi
+uvicorn
+python-multipart

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FoodLens | See Freshness. Ensure Quality.</title>
+  <meta name="description" content="FoodLens is an AI-powered food inspection website for checking the visible condition of fruits and vegetables.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<!-- "intro-active" hides the page until the welcome animation ends (script.js removes it) -->
+<body data-page="home" class="intro-active">
+
+  <!-- Soft moving background + floating leaves -->
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+    <div id="leaf-layer"></div>
+  </div>
+
+  <!-- Welcome / loading animation (plays once per visit) -->
+  <div class="intro" id="intro">
+    <div class="intro-glow"></div>
+    <div class="intro-particles" id="intro-particles"></div>
+    <div id="intro-stars"></div>
+    <div id="intro-burst"></div>
+    <div class="intro-text">
+      <p class="intro-welcome">WELCOME TO</p>
+      <h1 class="intro-brand" id="intro-brand">FOODLENS</h1>
+    </div>
+    <button class="intro-skip" id="intro-skip">Skip</button>
+  </div>
+
+  <!-- Navigation + chatbot are built by script.js -->
+  <div id="app-nav"></div>
+
+  <main class="main page">
+    <section class="hero">
+      <div class="hero-text">
+        <span class="eyebrow hero-anim" style="--i:0"><i class="dot"></i>See Freshness. Ensure Quality.</span>
+        <h1 class="hero-anim" style="--i:1">AI-Powered <span class="grad">Food Freshness</span> Inspection</h1>
+        <p class="lead hero-anim" style="--i:2">Upload a fruit or vegetable image and let FoodLens analyze its condition and suggest the next inspection time.</p>
+        <div class="btn-row hero-anim" style="--i:3">
+          <a class="btn btn-primary" href="detection.html">Start Inspection <i data-icon="arrow"></i></a>
+          <a class="btn btn-ghost" href="#why">Explore FoodLens</a>
+        </div>
+        <div class="hero-badges hero-anim" style="--i:4">
+          <span class="pill"><i data-icon="check"></i>Upload or camera</span>
+          <span class="pill"><i data-icon="check"></i>Fresh or Rotten result</span>
+          <span class="pill"><i data-icon="check"></i>History saved</span>
+        </div>
+      </div>
+
+      <div class="hero-visual hero-anim" style="--i:2">
+        <div class="hero-orb"></div>
+        <div class="hero-card glass">
+          <img data-food="banana" alt="A ripe banana being scanned">
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+          <span class="scanline"></span>
+        </div>
+        <img class="mini-fruit m1" data-food="tomato" alt="A ripe tomato">
+        <img class="mini-fruit m2" data-food="broccoli" alt="Fresh broccoli">
+        <img class="mini-fruit m3" data-food="apple" alt="A red apple">
+        <div class="float-chip glass">
+          <span class="tick"><i data-icon="check"></i></span>
+          <div>Condition check<small>Fresh or Rotten</small></div>
+        </div>
+        <div class="hero-sparkles" id="hero-sparkles"></div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="section-head reveal">
+        <h2>Why FoodLens?</h2>
+        <p>A simple way to look at your fruits and vegetables more closely.</p>
+      </div>
+      <div class="card-grid">
+        <article class="feature-card glass reveal" style="--i:0">
+          <div class="icon-wrap" data-icon="cpu"></div>
+          <h3>AI-Powered Detection</h3>
+          <p>Image-based analysis that recognizes the food and its visible condition.</p>
+        </article>
+        <article class="feature-card glass reveal" style="--i:1">
+          <div class="icon-wrap" data-icon="zap"></div>
+          <h3>Quick Inspection</h3>
+          <p>Upload a photo or use your camera and see the result right away.</p>
+        </article>
+        <article class="feature-card glass reveal" style="--i:2">
+          <div class="icon-wrap" data-icon="history"></div>
+          <h3>Inspection History</h3>
+          <p>Every inspection is saved, so you can look back at earlier results.</p>
+        </article>
+        <article class="feature-card glass reveal" style="--i:3">
+          <div class="icon-wrap" data-icon="bulb"></div>
+          <h3>Smart Insights</h3>
+          <p>Each result comes with a plain explanation and a suggested next inspection time.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta glass reveal">
+      <div>
+        <h2>Ready to check your food?</h2>
+        <p>It takes one photo.</p>
+      </div>
+      <a class="btn btn-primary" href="detection.html">Start Inspection <i data-icon="arrow"></i></a>
+    </section>
+
+    <p class="footer">FoodLens &copy; 2026. Results are visual estimates and not a food-safety guarantee.</p>
+  </main>
+
+  <div id="app-chatbot"></div>
+  <script src="script.js"></script>
+</body>
+</html>

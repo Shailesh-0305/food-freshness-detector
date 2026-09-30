@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Food Inspection | FoodLens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="detection">
+
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+    <div id="leaf-layer"></div>
+  </div>
+
+  <div id="app-nav"></div>
+
+  <main class="main page">
+    <header class="page-head">
+      <h1>Food Inspection</h1>
+      <p>Upload or capture a food image to begin analysis.</p>
+    </header>
+
+    <!-- Detector: tabs + upload / camera / preview panes -->
+    <section class="detector glass">
+      <div class="segmented" id="tabs" data-active="upload" role="tablist">
+        <span class="seg-thumb"></span>
+        <button type="button" role="tab" data-tab="upload" class="active"><i data-icon="upload"></i>Upload Image</button>
+        <button type="button" role="tab" data-tab="camera"><i data-icon="camera"></i>Camera</button>
+      </div>
+
+      <!-- OPTION 1: upload -->
+      <div class="pane active" id="pane-upload">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose an image to upload">
+          <div class="drop-icon" data-icon="upload"></div>
+          <h3>Drop your image here</h3>
+          <span class="or">or</span>
+          <span class="btn btn-primary btn-sm" id="choose-btn">Choose Image</span>
+          <p class="hint">JPG, JPEG, PNG or WEBP, up to 10 MB</p>
+          <input type="file" id="file-input" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" hidden>
+        </div>
+      </div>
+
+      <!-- OPTION 2: camera -->
+      <div class="pane" id="pane-camera">
+        <div class="camera-stage" id="camera-stage">
+          <video id="video" playsinline muted autoplay></video>
+          <div class="camera-idle">Starting camera...</div>
+          <div class="frame">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <span class="scanline"></span>
+          </div>
+          <span class="status-pill wait" id="camera-status"><i></i><b>Camera Ready</b></span>
+          <div class="camera-error hidden" id="camera-error">
+            <p id="camera-error-text"></p>
+            <button type="button" class="btn btn-ghost btn-sm" id="camera-retry">Try again</button>
+          </div>
+          <div class="shutter-flash" id="shutter"></div>
+        </div>
+        <div class="btn-row center">
+          <button type="button" class="btn btn-primary" id="capture-btn" disabled><i data-icon="camera"></i>Capture Image</button>
+        </div>
+      </div>
+
+      <!-- Preview + scanning (shared by upload and camera) -->
+      <div class="pane" id="pane-preview">
+        <div class="preview-frame" id="preview-frame">
+          <img id="preview-img" alt="Selected food image">
+          <div class="scan-overlay">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <span class="scanline"></span>
+            <div class="scan-particles" id="scan-particles"></div>
+            <div class="scan-status">
+              <span id="scan-text">Scanning...</span>
+              <div class="progress"><i id="scan-bar"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-row center">
+          <button type="button" class="btn btn-primary" id="analyze-btn"><i data-icon="sparkles"></i>Analyze Food</button>
+          <button type="button" class="btn btn-ghost" id="reset-btn">Choose another image</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Result card: filled in by showResult() in script.js -->
+    <section class="result-wrap" id="result-wrap" hidden>
+      <article class="result-card glass" id="result-card">
+        <div class="result-head">
+          <div>
+            <h2>Analysis Results</h2>
+            <p>Here's what we found from your image.</p>
+          </div>
+          <span class="pill" id="saved-pill" hidden><i data-icon="check"></i>Saved to History</span>
+        </div>
+
+        <div class="demo-banner" id="demo-banner" hidden>Demo result: no trained model is connected yet, so these values are placeholders and not a real analysis.</div>
+
+        <div class="result-grid">
+          <div class="res-photo">
+            <img id="res-img" alt="Analyzed food">
+            <span class="detected-chip">Detected: <b id="res-food">-</b></span>
+          </div>
+
+          <div class="res-main">
+            <div class="res-condition">
+              <span class="cond-badge fresh" id="res-cond">Fresh</span>
+              <small>Visual condition</small>
+            </div>
+            <div class="res-ring-row">
+              <div class="ring" id="ring">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#0d9488"/></linearGradient></defs>
+                  <circle class="ring-bg" cx="60" cy="60" r="52"/>
+                  <circle class="ring-fg" id="ring-fg" cx="60" cy="60" r="52"/>
+                </svg>
+                <div class="ring-label"><b id="res-conf">0%</b><span>Confidence</span></div>
+              </div>
+              <ul class="res-facts">
+                <li>Detected Food<b id="res-food2">-</b></li>
+                <li>Next Inspection<b id="res-next">-</b><small id="res-next-hint"></small></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="res-insight">
+            <h4><i data-icon="sparkles"></i>AI Insight</h4>
+            <p id="res-insight"></p>
+          </div>
+        </div>
+
+        <div class="res-meta">
+          <div>Inspection ID<b id="res-id">-</b></div>
+          <div>Date<b id="res-date">-</b></div>
+          <div>Time<b id="res-time">-</b></div>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn-primary" href="history.html">View History <i data-icon="arrow"></i></a>
+          <button type="button" class="btn btn-ghost" id="new-scan">Inspect another</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div id="app-chatbot"></div>
+  <script src="script.js"></script>
+</body>
+</html>

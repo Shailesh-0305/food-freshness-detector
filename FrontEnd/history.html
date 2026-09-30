@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Inspection History | FoodLens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="history">
+
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+    <div id="leaf-layer"></div>
+  </div>
+
+  <div id="app-nav"></div>
+
+  <main class="main page">
+    <header class="page-head">
+      <h1>Inspection History</h1>
+      <p>View your previous food inspections.</p>
+    </header>
+
+    <!-- Totals (numbers count up) -->
+    <section class="stat-row">
+      <div class="stat glass"><div class="icon-wrap" data-icon="grid"></div><div><b id="stat-total">0</b><span>Total inspections</span></div></div>
+      <div class="stat glass"><div class="icon-wrap" data-icon="leaf"></div><div><b id="stat-fresh">0</b><span>Fresh</span></div></div>
+      <div class="stat glass"><div class="icon-wrap" data-icon="shield"></div><div><b id="stat-rotten">0</b><span>Rotten</span></div></div>
+    </section>
+
+    <!-- Search, filter, sort -->
+    <section class="toolbar">
+      <label class="search-box">
+        <i data-icon="search"></i>
+        <input type="search" id="history-search" placeholder="Search by food, ID or date" aria-label="Search history">
+      </label>
+      <div class="filter-group" id="history-filter" role="group" aria-label="Filter by condition">
+        <button type="button" class="active" data-filter="all">All</button>
+        <button type="button" data-filter="fresh">Fresh</button>
+        <button type="button" data-filter="rotten">Rotten</button>
+      </div>
+      <select class="select" id="history-sort" aria-label="Sort by">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="confidence">Highest confidence</option>
+      </select>
+      <button type="button" class="link-danger" id="history-clear">Clear history</button>
+    </section>
+
+    <!-- Cards are drawn by initHistoryPage() in script.js -->
+    <section class="history-grid" id="history-grid" aria-live="polite"></section>
+  </main>
+
+  <div id="app-chatbot"></div>
+  <script src="script.js"></script>
+</body>
+</html>
