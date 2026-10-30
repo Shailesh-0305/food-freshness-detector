@@ -150,7 +150,10 @@ Then visit `http://localhost:3000` for the webcam interface or `http://localhost
    - Action space: `[0: Continue Storage, 1: Consume Soon, 2: Discard]`.
 
 ---
-Video Link : 
+
+## Video Link : 
+https://drive.google.com/drive/folders/1OWZzo2Uv4R37yep90EBE51oTAQNmovZ6?usp=sharing
+
 ---
 
 ## 📜 License
